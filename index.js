@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const {Triangle, Circle, Square} = require("./lib/shapes");
+const { Triangle, Circle, Square } = require("./lib/shapes");
 
 const prompt = () => {
     return inquirer.prompt([
@@ -8,11 +8,15 @@ const prompt = () => {
             type: 'input',
             name: 'Text',
             message: 'Text can only be 3 characters',
-            validate: (text) => {
-                if (text.length > 3) {
-                return "shouldn't contain more than 3 characters"
+            validate: (Text) => {
+
+                if (Text.length <= 3) {
+                    return true;
+                } else {
+                    console.log ("Shouldn't contain more than 3 characters");
+                    return false;
                 }
-            }
+            },
         },
 
         {
@@ -41,13 +45,13 @@ const init = () => {
         .then((answers) => {
             let newShape;
             if (answers.Shape === "triangle") {
-                newShape = new Triangle (answers.Shapecolor, answers.Textcolor, answers.Text)
+                newShape = new Triangle(answers.Shapecolor, answers.Textcolor, answers.Text)
             } else if (answers.Shape === "circle") {
-                newShape = new Circle (answers.Shapecolor, answers.Textcolor, answers.Text)
+                newShape = new Circle(answers.Shapecolor, answers.Textcolor, answers.Text)
             } else {
-                newShape = new Square (answers.Shapecolor, answers.Textcolor, answers.Text)
+                newShape = new Square(answers.Shapecolor, answers.Textcolor, answers.Text)
             };
-            console.log (newShape.render());
+            console.log(newShape.render());
             fs.writeFile('logo.svg', newShape.render(),
                 (err) => {
                     if (err)
