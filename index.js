@@ -9,8 +9,9 @@ const prompt = () => {
             name: 'Text',
             message: 'Text can only be 3 characters',
             validate: (text) => {
-                text.length <= 3 ||
-                "shouldn't contain more than 3 characters"
+                if (text.length > 3) {
+                return "shouldn't contain more than 3 characters"
+                }
             }
         },
 
